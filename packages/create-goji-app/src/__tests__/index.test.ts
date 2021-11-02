@@ -2,6 +2,7 @@ import { promisify } from 'util';
 import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 describe('create-goji-app', () => {
   jest.setTimeout(5 * 60 * 1000);
@@ -9,7 +10,7 @@ describe('create-goji-app', () => {
   it('create project', async () => {
     // prepare
     const binPath = require.resolve('../../bin/create-goji-app');
-    const workDir = '/tmp/.create-goji-app';
+    const workDir = path.join(os.tmpdir(), '.create-goji-app');
     await fs.promises.rmdir(workDir, { recursive: true });
     await fs.promises.mkdir(workDir, { recursive: true });
     const projectName = 'my-goji-app';
